@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigmatic Number Quest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/images/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Page de chargement -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="progress-wrapper">
+            <div class="loading-counter">0%</div>
+            <div class="progress-container">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ajouter après la page de chargement et avant le conteneur principal -->
+    <div id="introScreen" class="intro-screen" style="display: none;">
+        <div id="particles-js"></div>
+        <div class="intro-content">
+            <div class="intro-header">
+                <img src="assets/images/numbers.gif" alt="Logo" class="intro-logo">
+                <h1 class="intro-title">Enigmatic Number Quest</h1>
+            </div>
+            <div class="intro-rules">
+                <p><i class="fas fa-book"></i> Règles du jeu :</p>
+                <ul>
+                    <li><i class="fas fa-search"></i> Trouvez la séquence de chiffres cachée</li>
+                    <li><i class="fas fa-check-circle"></i> 'V' : chiffre correct et bien placé</li>
+                    <li><i class="fas fa-exchange-alt"></i> 'E' : chiffre correct mais mal placé</li>
+                    <li><i class="fas fa-times-circle"></i> 'F' : chiffre absent de la séquence</li>
+                </ul>
+                <div class="example">
+                    <div><i class="fas fa-lightbulb"></i> Exemple :</div>
+                    <div><i class="fas fa-bullseye"></i> Nombre cible : 7582</div>
+                    <div><i class="fas fa-keyboard"></i> Votre essai : 7284</div>
+                    <div><i class="fas fa-arrow-right"></i> Résultat : VEVF</div>
+                </div>
+            </div>
+            <button id="startGameBtn" class="start-game-btn">Commencer le jeu</button>
+        </div>
+    </div>
+
+    <!-- Conteneur principal du jeu -->
+    <div class="container" style="display: none;">
+        <button id="helpButton">Help!</button>
+        <h1 id="gameTitle">Enigmatic Number Quest</h1>
+        <div id="levelInfo">Level : 1, Round : 0</div>
+
+        <div id="gameBoard">
+            <div id="numberChecks"></div>
+            <div id="checkResults"></div>
+        </div>
+
+        <div id="numberPad"></div>
+        
+        <button id="checkButton">Check!</button>
+        <button id="nextRoundButton" style="display: none;">Next round</button>
+        <button id="nextLevelButton" style="display: none;">Next level</button>
+        <button id="startGameButton">Start Game</button>
+        
+        <div id="endGameMessage" style="display: none;">
+            Congratulations, go to the next level
+        </div>
+    </div>
+
+    <!-- Modal d'aide -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <h2>Help!</h2>
+            <p>Rules of the game:</p>
+            <ul>
+                <li>You need to find a sequence of digits</li>
+                <li>If a digit is correct and in the right position, 'V' is displayed</li>
+                <li>If a digit is correct but in the wrong position, 'E' is displayed</li>
+                <li>If a digit does not exist in the target number, 'F' is displayed</li>
+                <li>The game ends when the number is found</li>
+            </ul>
+            <p>Example:<br>
+            Target Number: 7582<br>
+            Guess: 7284<br>
+            Response: VEVF<br>
+            (7 is correctly placed, 2 and 8 are correct but misplaced, 5 is absent)</p>
+            <button id="closeHelp">Close</button>
+        </div>
+    </div>
+
+    <!-- Sons du jeu -->
+    <audio id="sound-click" src="assets/images/click.mp3"></audio>
+    <audio id="sound-check-false" src="assets/images/chick_false.mp3"></audio>
+    <audio id="sound-error" src="assets/images/Error.mp3"></audio>
+    <audio id="sound-help" src="assets/images/help.mp3"></audio>
+    <audio id="sound-next-round" src="assets/images/next_round.mp3"></audio>
+    <audio id="sound-put" src="assets/images/put.wav"></audio>
+    <audio id="sound-start-game" src="assets/images/start_game.mp3"></audio>
+    <audio id="sound-congratulation" src="assets/images/Congratulation.mp3"></audio>
+    <audio id="sound-next-level" src="assets/images/next_level.mp3"></audio>
+    <audio id="sound-success" src="assets/images/success.mp3"></audio>
+
+    <script src="game.js"></script>
+</body>
+</html>
