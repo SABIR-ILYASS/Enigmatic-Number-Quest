@@ -41,34 +41,48 @@
                     <div><i class="fas fa-lightbulb"></i> Exemple :</div>
                     <div><i class="fas fa-bullseye"></i> Nombre cible : 7582</div>
                     <div><i class="fas fa-keyboard"></i> Votre essai : 7284</div>
-                    <div><i class="fas fa-arrow-right"></i> Résultat : VEVF</div>
+                    <div><i class="fas fa-arrow-right"></i> Résultat : 
+                        <span class="result-letter result-v">V</span>
+                        <span class="result-letter result-e">E</span>
+                        <span class="result-letter result-v">V</span>
+                        <span class="result-letter result-f">F</span>
+                    </div>
                 </div>
             </div>
             <button id="startGameBtn" class="start-game-btn">Commencer le jeu</button>
         </div>
     </div>
 
-    <!-- Conteneur principal du jeu -->
+    <!-- Modifier la structure du conteneur principal -->
     <div class="container" style="display: none;">
+        <div id="game-particles-js"></div>
+        <div class="game-header">
+            <img src="assets/images/numbers.gif" alt="Logo" class="game-logo">
+            <h1 id="gameTitle">Enigmatic Number Quest</h1>
+        </div>
+        <div class="game-wrapper">
+            <div class="game-container">
+                <div id="gameBoard">
+                    <div id="numberChecks"></div>
+                    <div id="checkResults"></div>
+                </div>
+                <div id="numberPad"></div>
+                
+                <button id="checkButton">Check!</button>
+                <button id="nextRoundButton" style="display: none;">Next round</button>
+                <button id="nextLevelButton" style="display: none;">Next level</button>
+                <button id="startGameButton">Start Game</button>
+                
+                <div id="endGameMessage" style="display: none;">
+                    Congratulations, go to the next level
+                </div>
+            </div>
+            <div class="level-container">
+                <div class="level-info-line">Level : 1</div>
+                <div class="level-info-line">Round : 0</div>
+            </div>
+        </div>
         <button id="helpButton">Help!</button>
-        <h1 id="gameTitle">Enigmatic Number Quest</h1>
-        <div id="levelInfo">Level : 1, Round : 0</div>
-
-        <div id="gameBoard">
-            <div id="numberChecks"></div>
-            <div id="checkResults"></div>
-        </div>
-
-        <div id="numberPad"></div>
-        
-        <button id="checkButton">Check!</button>
-        <button id="nextRoundButton" style="display: none;">Next round</button>
-        <button id="nextLevelButton" style="display: none;">Next level</button>
-        <button id="startGameButton">Start Game</button>
-        
-        <div id="endGameMessage" style="display: none;">
-            Congratulations, go to the next level
-        </div>
     </div>
 
     <!-- Modal d'aide -->

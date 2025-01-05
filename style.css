@@ -5,16 +5,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
+    align-items: center;
     min-height: 100vh;
-}
-
-.container {
-    width: 1200px;
-    height: 600px;
-    position: relative;
-    background-color: #063250; /* Assurer que le conteneur a également le fond défini */
-    border: 2px solid #0B598D; /* Exemple de bordure utilisant une couleur dégradée */
-    border-radius: 10px;
 }
 
 #gameTitle {
@@ -63,15 +55,15 @@ body {
 #numberPad {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin-top: 20px;
+    gap: 15px;
+    margin-top: 25px;
 }
 
 #numberChecks, #checkResults {
     display: flex;
     justify-content: center;
-    gap: 10px;
-    margin: 20px 0;
+    gap: 15px;
+    margin: 25px 0;
 }
 
 .check-slot {
@@ -669,65 +661,68 @@ button:hover {
 }
 
 .intro-rules {
-    color: white;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-bottom: 30px;
-    background: rgba(6, 50, 80, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: rgba(8, 67, 106, 0.4);  /* Plus transparent */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
     border: 2px solid rgba(21, 147, 230, 0.3);
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: inset 0 0 15px rgba(21, 147, 230, 0.2);
+    box-shadow: 0 0 20px rgba(21, 147, 230, 0.3);
+    padding: 30px;
 }
 
 .intro-rules p {
-    margin-top: 0;
-    margin-bottom: 20px;
+    text-align: center;
+    margin: 20px 0;
+    font-size: 20px;
+    color: #ffffff;
 }
 
 .intro-rules ul {
-    text-align: left;
-    padding-left: 0;
-    margin: 15px auto;
-    margin-left: 120px;
-    list-style-type: none;
-    max-width: 400px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+    width: 100%;
 }
 
 .intro-rules li {
-    margin: 12px 0;
-    position: relative;
-    padding-left: 0;
+    margin: 15px 0;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.example {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-}
-
-.intro-rules li::before {
-    display: none;
-}
-
-.intro-rules .example {
-    text-align: left;
-    margin: 20px auto;
-    margin-left: 120px;
+    justify-content: center;
+    margin: 30px auto 10px;
+    width: 100%;
+    border-top: 2px solid rgba(21, 147, 230, 0.3);
     padding-top: 20px;
-    border-top: 1px solid rgba(21, 147, 230, 0.3);
-    max-width: 400px;
 }
 
 .example div {
     margin: 8px 0;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;
+    width: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 }
 
-.intro-rules .example br {
-    margin-bottom: 8px;
-    content: "";
-    display: block;
+.example div i {
+    width: 20px;
+    text-align: center;
 }
 
 .start-game-btn {
@@ -912,3 +907,292 @@ button:hover {
 .example div:nth-child(2) { animation-delay: 0.9s; }
 .example div:nth-child(3) { animation-delay: 1.0s; }
 .example div:nth-child(4) { animation-delay: 1.1s; }
+
+.game-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.game-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#gameTitle {
+    margin: 0;
+    font-size: 36px;
+    color: #1593E6;
+    text-shadow: 0 0 10px rgba(21, 147, 230, 0.5);
+}
+
+@media screen and (max-width: 480px) {
+    .game-logo {
+        width: 30px;
+        height: 30px;
+    }
+
+    #gameTitle {
+        font-size: 24px;
+    }
+}
+
+.game-container {
+    background-color: rgba(8, 67, 106, 0.4);  /* Plus transparent */
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 2px solid rgba(21, 147, 230, 0.3);
+    box-shadow: 0 0 20px rgba(21, 147, 230, 0.3);
+    padding: 30px;
+    width: 95%;
+    max-width: 700px;
+    position: relative;
+}
+
+.game-header {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    background: none;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    white-space: nowrap;
+    z-index: 3;  /* S'assurer que le titre reste au-dessus */
+}
+
+#levelInfo {
+    margin-top: 10px;
+    text-align: center;
+    color: #1593E6;
+    font-size: 18px;
+}
+
+/* Ajuster pour les petits écrans */
+@media screen and (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    .game-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+.container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #063250 0%, #08436A 50%, #0B598D 100%);
+    z-index: 1;  /* Réduire le z-index pour que le fond soit visible */
+    display: flex;
+    flex-direction: column;  /* Organiser les éléments verticalement */
+    justify-content: center;
+    align-items: center;
+}
+
+#game-particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.game-container {
+    position: relative;
+    z-index: 2;
+    background-color: rgba(8, 67, 106, 0.2);  /* Encore plus transparent */
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    border: 2px solid rgba(21, 147, 230, 0.3);
+    box-shadow: 0 0 20px rgba(21, 147, 230, 0.3);
+    padding: 30px;
+    width: 95%;
+    max-width: 700px;
+    margin-top: 50px;  /* Espace pour le titre */
+}
+
+#helpButton {
+    position: fixed;  /* Fixer le bouton d'aide */
+    top: 20px;
+    right: 20px;
+    z-index: 4;
+}
+
+/* Conteneur pour le jeu et les infos */
+.game-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    z-index: 2;
+    margin-top: 60px; /* Espace pour le titre */
+}
+
+/* Rectangle principal du jeu */
+.game-container {
+    background-color: rgba(8, 67, 106, 0.2);  /* Encore plus transparent */
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    border: 2px solid rgba(21, 147, 230, 0.3);
+    box-shadow: 0 0 20px rgba(21, 147, 230, 0.3);
+    padding: 30px;
+    width: 95%;
+    max-width: 700px;
+    position: relative;
+}
+
+/* Rectangle pour le level et round */
+.level-container {
+    background-color: rgba(8, 67, 106, 0.2);  /* Encore plus transparent */
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    border: 2px solid rgba(21, 147, 230, 0.3);
+    box-shadow: 0 0 20px rgba(21, 147, 230, 0.3);
+    padding: 20px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 2;
+}
+
+.level-info-line {
+    color: #1593E6;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Gabriola', serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(21, 147, 230, 0.3);
+}
+
+#levelInfo {
+    color: #1593E6;
+    font-size: 24px;
+    text-align: center;
+    font-family: 'Gabriola', serif;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(21, 147, 230, 0.3);
+}
+
+/* Media queries */
+@media screen and (max-width: 1024px) {
+    .game-wrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .level-container {
+        width: 95%;
+        max-width: 700px;
+        min-width: auto;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .game-wrapper {
+        margin-top: 45px;
+    }
+
+    #levelInfo {
+        font-size: 20px;
+    }
+}
+
+/* Styles pour l'exemple */
+.example {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 30px auto;
+    width: 100%;
+    max-width: 400px;  /* Limiter la largeur pour un meilleur alignement */
+}
+
+.example div {
+    margin: 8px 0;
+    font-size: 18px;
+    color: #ffffff;
+    text-align: center;  /* Centrer le texte */
+}
+
+/* Styles pour les lettres du résultat */
+.result-letter {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 3px;
+}
+
+.result-v {
+    color: #4CAF50;  /* Vert */
+    text-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+}
+
+.result-e {
+    color: #FFC107;  /* Jaune */
+    text-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.result-f {
+    color: #FF3B3B;  /* Rouge */
+    text-shadow: 0 0 5px rgba(255, 59, 59, 0.5);
+}
+
+/* Ajuster pour les petits écrans */
+@media screen and (max-width: 480px) {
+    .example {
+        max-width: 300px;
+    }
+}
+
+/* Media queries */
+@media screen and (max-width: 480px) {
+    .intro-rules {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .intro-rules p {
+        font-size: 18px;
+    }
+
+    .intro-rules li {
+        font-size: 16px;
+    }
+
+    .example div {
+        font-size: 16px;
+    }
+}
+
+/* Style spécifique pour le rectangle des règles */
+.intro-rules {
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    z-index: 2;
+}
+
+/* Ajuster le z-index des particules */
+#game-particles-js, #particles-js {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
