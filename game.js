@@ -18,6 +18,7 @@ class Game {
             this.createCheckSlots();
             this.handleLoadingScreen();
             this.createIntroFloatingNumbers();
+            this.initializeRulesModal();
         });
     }
 
@@ -227,51 +228,28 @@ class Game {
             number.className = 'number';
             number.textContent = Math.floor(Math.random() * 10);
 
-            // Position initiale aléatoire
-            const initialX = Math.random() * 100;
-            const initialY = Math.random() * 100;
-            
-            // Positions pour l'animation
-            const moveX = (Math.random() - 0.5) * 50;
-            const moveY = (Math.random() - 0.5) * 50;
-            
-            // Animation et style
+            // Positions et animations aléatoires
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const endX = Math.random() * 100;
+            const endY = Math.random() * 100;
             const duration = 3 + Math.random() * 4;
-            const startScale = 0.5 + Math.random() * 0.5;
-            const endScale = 0.5 + Math.random() * 0.5;
             const size = 20 + Math.random() * 40;
             const rotation = Math.random() * 360;
             const color = colors[Math.floor(Math.random() * colors.length)];
-            const maxOpacity = 0.3 + Math.random() * 0.4;
 
-            // Position initiale
-            number.style.left = `${initialX}vw`;
-            number.style.top = `${initialY}vh`;
-
-            // Appliquer les propriétés CSS pour l'animation
-            number.style.setProperty('--startX', '0');
-            number.style.setProperty('--startY', '0');
-            number.style.setProperty('--endX', `${moveX}vw`);
-            number.style.setProperty('--endY', `${moveY}vh`);
+            number.style.setProperty('--startX', `${startX}vw`);
+            number.style.setProperty('--startY', `${startY}vh`);
+            number.style.setProperty('--endX', `${endX}vw`);
+            number.style.setProperty('--endY', `${endY}vh`);
             number.style.setProperty('--duration', `${duration}s`);
-            number.style.setProperty('--startScale', startScale);
-            number.style.setProperty('--endScale', endScale);
             number.style.setProperty('--original-size', `${size}px`);
             number.style.setProperty('--size', `${size}px`);
             number.style.setProperty('--color', color);
             number.style.setProperty('--rotation', `${rotation}deg`);
-            number.style.setProperty('--maxOpacity', maxOpacity);
             
             // Délai aléatoire pour le début de l'animation
             number.style.animationDelay = `${Math.random() * 2}s`;
-
-            // Réinitialiser l'animation lorsqu'elle se termine
-            number.addEventListener('animationend', () => {
-                number.style.animationDelay = '0s';
-                number.style.animation = 'none';
-                number.offsetHeight; // Forcer un reflow
-                number.style.animation = `floatNumber ${duration}s linear infinite`;
-            });
 
             floatingNumbers.appendChild(number);
         }
@@ -560,25 +538,22 @@ class Game {
     }
 
     createIntroFloatingNumbers() {
-        const introScreen = document.getElementById('introScreen');
         const floatingNumbers = document.createElement('div');
         floatingNumbers.className = 'floating-numbers';
-        introScreen.appendChild(floatingNumbers);
+        document.getElementById('introScreen').appendChild(floatingNumbers);
 
         const colors = ['#1593E6', '#4CAF50', '#FF3B3B', '#FFC107', '#9C27B0', '#FF9800'];
         
         for (let i = 0; i < 40; i++) {
             const number = document.createElement('div');
-            number.className = 'intro-number';
+            number.className = 'number intro-number';
             number.textContent = Math.floor(Math.random() * 10);
 
-            // Position initiale aléatoire
-            const initialX = Math.random() * 100;
-            const initialY = Math.random() * 100;
-            
-            // Positions pour l'animation
-            const moveX = (Math.random() - 0.5) * 50; // Déplacement relatif de -25% à +25%
-            const moveY = (Math.random() - 0.5) * 50; // Déplacement relatif de -25% à +25%
+            // Positions aléatoires
+            const startX = Math.random() * 100;
+            const startY = Math.random() * 100;
+            const endX = Math.random() * 100;
+            const endY = Math.random() * 100;
             
             // Animation et style
             const duration = 4 + Math.random() * 6;
@@ -589,15 +564,11 @@ class Game {
             const color = colors[Math.floor(Math.random() * colors.length)];
             const maxOpacity = 0.3 + Math.random() * 0.4;
 
-            // Position initiale
-            number.style.left = `${initialX}vw`;
-            number.style.top = `${initialY}vh`;
-
-            // Appliquer les propriétés CSS pour l'animation
-            number.style.setProperty('--startX', '0');
-            number.style.setProperty('--startY', '0');
-            number.style.setProperty('--endX', `${moveX}vw`);
-            number.style.setProperty('--endY', `${moveY}vh`);
+            // Appliquer les propriétés CSS
+            number.style.setProperty('--startX', `${startX}vw`);
+            number.style.setProperty('--startY', `${startY}vh`);
+            number.style.setProperty('--endX', `${endX}vw`);
+            number.style.setProperty('--endY', `${endY}vh`);
             number.style.setProperty('--duration', `${duration}s`);
             number.style.setProperty('--startScale', startScale);
             number.style.setProperty('--endScale', endScale);
@@ -609,6 +580,14 @@ class Game {
             // Délai aléatoire pour le début de l'animation
             number.style.animationDelay = `${Math.random() * 3}s`;
 
+            // Réinitialiser l'animation lorsqu'elle se termine
+            number.addEventListener('animationend', () => {
+                number.style.animationDelay = '0s';
+                number.style.animation = 'none';
+                number.offsetHeight; // Forcer un reflow
+                number.style.animation = `floatNumber ${duration}s linear infinite`;
+            });
+
             floatingNumbers.appendChild(number);
         }
     }
@@ -619,6 +598,61 @@ class Game {
             <div class="level-info-line">Level : ${this.level}</div>
             <div class="level-info-line">Round : ${this.round}</div>
         `;
+    }
+
+    initializeRulesModal() {
+        const rulesButton = document.getElementById('helpButton');
+        
+        rulesButton.addEventListener('click', () => {
+            this.sounds.help.play();
+            
+            // Créer la modal
+            const modal = document.createElement('div');
+            modal.className = 'modal rules-modal';
+            
+            // Créer le contenu de la modal
+            const modalContent = document.createElement('div');
+            modalContent.className = 'modal-content';
+            
+            // Ajouter le contenu des règles
+            modalContent.innerHTML = `
+                <h2><i class="fas fa-book"></i> Règles du jeu</h2>
+                <div class="rules-content">
+                    <p>• Vous devez trouver une séquence de chiffres.</p>
+                    <p>• Si un chiffre est correct et bien placé, 'V' est affiché.</p>
+                    <p>• Si un chiffre est correct mais mal placé, 'E' est affiché.</p>
+                    <p>• Si un chiffre n'existe pas dans la séquence, 'F' est affiché.</p>
+                    <p>• Le jeu se termine quand la séquence est trouvée.</p>
+                    
+                    <div class="example">
+                        <p><strong>Exemple :</strong></p>
+                        <p>Séquence cible : 7582</p>
+                        <p>Votre essai : 7284</p>
+                        <p>Réponse : <span class="result-v">V</span><span class="result-e">E</span><span class="result-e">E</span><span class="result-f">F</span></p>
+                        <p class="example-explanation">(7 est bien placé, 2 et 8 sont présents mais mal placés, 4 est absent)</p>
+                    </div>
+                </div>
+                <button id="closeHelp" class="close-rules-btn">Fermer</button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            modal.style.display = 'flex';
+
+            // Gestionnaire pour fermer la modal
+            const closeButton = modal.querySelector('#closeHelp');
+            const closeModal = () => {
+                this.sounds.click.play();
+                document.body.removeChild(modal);
+            };
+
+            closeButton.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
     }
 }
 
