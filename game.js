@@ -17,6 +17,7 @@ class Game {
             this.createNumberPad();
             this.createCheckSlots();
             this.handleLoadingScreen();
+            this.createIntroFloatingNumbers();
         });
     }
 
@@ -226,28 +227,51 @@ class Game {
             number.className = 'number';
             number.textContent = Math.floor(Math.random() * 10);
 
-            // Positions et animations aléatoires
-            const startX = Math.random() * 100;
-            const startY = Math.random() * 100;
-            const endX = Math.random() * 100;
-            const endY = Math.random() * 100;
+            // Position initiale aléatoire
+            const initialX = Math.random() * 100;
+            const initialY = Math.random() * 100;
+            
+            // Positions pour l'animation
+            const moveX = (Math.random() - 0.5) * 50;
+            const moveY = (Math.random() - 0.5) * 50;
+            
+            // Animation et style
             const duration = 3 + Math.random() * 4;
+            const startScale = 0.5 + Math.random() * 0.5;
+            const endScale = 0.5 + Math.random() * 0.5;
             const size = 20 + Math.random() * 40;
             const rotation = Math.random() * 360;
             const color = colors[Math.floor(Math.random() * colors.length)];
+            const maxOpacity = 0.3 + Math.random() * 0.4;
 
-            number.style.setProperty('--startX', `${startX}vw`);
-            number.style.setProperty('--startY', `${startY}vh`);
-            number.style.setProperty('--endX', `${endX}vw`);
-            number.style.setProperty('--endY', `${endY}vh`);
+            // Position initiale
+            number.style.left = `${initialX}vw`;
+            number.style.top = `${initialY}vh`;
+
+            // Appliquer les propriétés CSS pour l'animation
+            number.style.setProperty('--startX', '0');
+            number.style.setProperty('--startY', '0');
+            number.style.setProperty('--endX', `${moveX}vw`);
+            number.style.setProperty('--endY', `${moveY}vh`);
             number.style.setProperty('--duration', `${duration}s`);
+            number.style.setProperty('--startScale', startScale);
+            number.style.setProperty('--endScale', endScale);
             number.style.setProperty('--original-size', `${size}px`);
             number.style.setProperty('--size', `${size}px`);
             number.style.setProperty('--color', color);
             number.style.setProperty('--rotation', `${rotation}deg`);
+            number.style.setProperty('--maxOpacity', maxOpacity);
             
             // Délai aléatoire pour le début de l'animation
             number.style.animationDelay = `${Math.random() * 2}s`;
+
+            // Réinitialiser l'animation lorsqu'elle se termine
+            number.addEventListener('animationend', () => {
+                number.style.animationDelay = '0s';
+                number.style.animation = 'none';
+                number.offsetHeight; // Forcer un reflow
+                number.style.animation = `floatNumber ${duration}s linear infinite`;
+            });
 
             floatingNumbers.appendChild(number);
         }
@@ -536,36 +560,55 @@ class Game {
     }
 
     createIntroFloatingNumbers() {
+        const introScreen = document.getElementById('introScreen');
         const floatingNumbers = document.createElement('div');
         floatingNumbers.className = 'floating-numbers';
-        document.getElementById('introScreen').appendChild(floatingNumbers);
+        introScreen.appendChild(floatingNumbers);
 
         const colors = ['#1593E6', '#4CAF50', '#FF3B3B', '#FFC107', '#9C27B0', '#FF9800'];
         
         for (let i = 0; i < 40; i++) {
             const number = document.createElement('div');
-            number.className = 'number intro-number';
+            number.className = 'intro-number';
             number.textContent = Math.floor(Math.random() * 10);
 
-            const startX = Math.random() * 100;
-            const startY = Math.random() * 100;
-            const endX = Math.random() * 100;
-            const endY = Math.random() * 100;
+            // Position initiale aléatoire
+            const initialX = Math.random() * 100;
+            const initialY = Math.random() * 100;
+            
+            // Positions pour l'animation
+            const moveX = (Math.random() - 0.5) * 50; // Déplacement relatif de -25% à +25%
+            const moveY = (Math.random() - 0.5) * 50; // Déplacement relatif de -25% à +25%
+            
+            // Animation et style
             const duration = 4 + Math.random() * 6;
+            const startScale = 0.5 + Math.random() * 0.5;
+            const endScale = 0.5 + Math.random() * 0.5;
             const size = 15 + Math.random() * 30;
             const rotation = Math.random() * 360;
             const color = colors[Math.floor(Math.random() * colors.length)];
+            const maxOpacity = 0.3 + Math.random() * 0.4;
 
-            number.style.setProperty('--startX', `${startX}vw`);
-            number.style.setProperty('--startY', `${startY}vh`);
-            number.style.setProperty('--endX', `${endX}vw`);
-            number.style.setProperty('--endY', `${endY}vh`);
+            // Position initiale
+            number.style.left = `${initialX}vw`;
+            number.style.top = `${initialY}vh`;
+
+            // Appliquer les propriétés CSS pour l'animation
+            number.style.setProperty('--startX', '0');
+            number.style.setProperty('--startY', '0');
+            number.style.setProperty('--endX', `${moveX}vw`);
+            number.style.setProperty('--endY', `${moveY}vh`);
             number.style.setProperty('--duration', `${duration}s`);
+            number.style.setProperty('--startScale', startScale);
+            number.style.setProperty('--endScale', endScale);
             number.style.setProperty('--size', `${size}px`);
             number.style.setProperty('--color', color);
             number.style.setProperty('--rotation', `${rotation}deg`);
+            number.style.setProperty('--maxOpacity', maxOpacity);
             
+            // Délai aléatoire pour le début de l'animation
             number.style.animationDelay = `${Math.random() * 3}s`;
+
             floatingNumbers.appendChild(number);
         }
     }
